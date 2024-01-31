@@ -3,7 +3,7 @@ package hellojpa;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 
-@Entity
+@Entity(name = "MBR")
 public class Member {
 
     @Id
