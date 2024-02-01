@@ -16,15 +16,12 @@ public class JpaMain {
         tx.begin();
 
         try {
+            Member member = new Member();
+            member.setId(3L);
+            member.setUsername("C");
+            member.setRoleType(RoleType.GUEST);
 
-            //영속
-            Member member = em.find(Member.class, 151L);
-            member.setName("AAAAA");
-
-            em.clear();
-
-            Member member1 = em.find(Member.class, 151L);
-            System.out.println("=======================");
+            em.persist(member);
             tx.commit();
         } catch (Exception e) {
             tx.rollback();
