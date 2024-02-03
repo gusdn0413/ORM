@@ -10,6 +10,9 @@ public class Member {
     private Long id;
     @Column(name = "USERNAME", nullable = false)
     private String name;
+    @OneToOne
+    @JoinColumn(name = "LOCKER_ID")
+    private Locker locker;
 
     public Long getId() {
         return id;
