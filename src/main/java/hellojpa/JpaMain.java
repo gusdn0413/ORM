@@ -3,6 +3,8 @@ package hellojpa;
 import hellojpa.item.Movie;
 import jakarta.persistence.*;
 
+import java.time.LocalDateTime;
+
 public class JpaMain {
 
     public static void main(String[] args) {
@@ -15,19 +17,16 @@ public class JpaMain {
         tx.begin();
 
         try {
-            Movie movie = new Movie();
-            movie.setDirector("a");
-            movie.setActor("b");
-            movie.setName("바람과 함께");
-            movie.setPrice(10000);
+            Member member = new Member();
 
-            em.persist(movie);
+            member.setCreatedBy("kim");
+            member.setCreatedDate(LocalDateTime.now());
+
+            em.persist(member);
 
             em.flush();
             em.clear();
 
-            Movie findMovie = em.find(Movie.class, movie.getId());
-            System.out.println("findMovie = " + findMovie);
             tx.commit();
         } catch (Exception e) {
             tx.rollback();
