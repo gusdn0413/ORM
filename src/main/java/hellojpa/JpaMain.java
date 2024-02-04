@@ -1,8 +1,7 @@
 package hellojpa;
 
+import hellojpa.item.Movie;
 import jakarta.persistence.*;
-
-import java.util.List;
 
 public class JpaMain {
 
@@ -16,15 +15,19 @@ public class JpaMain {
         tx.begin();
 
         try {
-            Member member = new Member();
-            member.setName("member1");
-            em.persist(member);
+            Movie movie = new Movie();
+            movie.setDirector("a");
+            movie.setActor("b");
+            movie.setName("바람과 함께");
+            movie.setPrice(10000);
 
-            Team team = new Team();
-            team.setName("teamA");
-            team.getMembers().add(member);
-            em.persist(team);
+            em.persist(movie);
 
+            em.flush();
+            em.clear();
+
+            Movie findMovie = em.find(Movie.class, movie.getId());
+            System.out.println("findMovie = " + findMovie);
             tx.commit();
         } catch (Exception e) {
             tx.rollback();
