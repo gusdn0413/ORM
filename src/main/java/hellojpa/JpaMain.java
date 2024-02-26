@@ -17,15 +17,22 @@ public class JpaMain {
         tx.begin();
 
         try {
-            Member member = new Member();
+            Member member1 = new Member();
+            member1.setName("hello1");
 
-            member.setCreatedBy("kim");
-            member.setCreatedDate(LocalDateTime.now());
+            Member member2 = new Member();
+            member2.setName("hello2");
 
-            em.persist(member);
-
+            em.persist(member1);
+            em.persist(member2);
             em.flush();
             em.clear();
+
+            //
+            Member m1 = em.getReference(Member.class, member1.getId());
+            Member m2 = em.getReference(Member.class, member2.getId());
+            System.out.println("===============================");
+            System.out.println("===============================");
 
             tx.commit();
         } catch (Exception e) {
@@ -33,7 +40,6 @@ public class JpaMain {
         } finally {
             em.close();
         }
-
         emf.close();
     }
 }
